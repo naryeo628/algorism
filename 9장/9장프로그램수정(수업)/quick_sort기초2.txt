@@ -1,0 +1,73 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int partition1(int A[], int s, int  e)
+{
+	if(e<=s) return s;
+	int *B=new int[e+1];
+	int i,j,k;
+	for(i=s,j=e,k=s+1;k<=e;k++){
+		if(A[k]<A[s]) B[i++]=A[k];
+		else          B[j--]=A[k];
+	}
+	B[i]=A[s];
+	for(k=s;k<=e;k++) A[k]=B[k];
+	delete[] B;
+	return i;
+}
+
+int partition2(int A[], int s,int e)
+{
+	if(e<=s) return s;
+	int i=s;
+	int j=e+1;
+	int pivot=A[s];
+	do{
+		do{i++;}while(i<=e && A[i]<pivot);
+		do{j--;}while(j>s && A[j]>=pivot);
+		if(i<j){
+			int t=A[i];
+			A[i]=A[j];
+			A[j]=t;
+		}
+	}while(i<j);
+	A[s]=A[j];
+	A[j]=pivot;
+	return j;
+}
+
+void sort_Quick(int A[], int s,int e)
+{
+	int m;
+	if(s>=e) return;
+	m=partition1(A,s,e);
+	sort_Quick(A,s,m-1);
+	sort_Quick(A,m+1,e);
+}
+
+int *create_A(int n)
+{
+	if(n<=0) return NULL;
+	int *A=new int[n];
+	for(int i=0;i<n;i++)
+		A[i]=rand();
+	for(i=0;i<n;i++) printf("%d  ",A[i]);
+		printf("\n");
+	return A;
+}
+
+void printData(int *A, int n)
+{
+	printf("Number of data=%d\n",n);
+	for(int i=0;i<n;i++)
+		printf("%d   ",A[i]);
+	printf("\n");
+}
+void main()
+{
+	int n=10;
+	int *A;
+	A=create_A(n);
+	sort_Quick(A,0,n-1);
+	printData(A,n);
+}

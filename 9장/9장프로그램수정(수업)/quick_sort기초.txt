@@ -1,0 +1,29 @@
+#include <stdio.h>
+#define SWAP(x,y,t)((t)=(x),(x)=(y),(y)=(t))
+#define MAX_SIZE 10
+
+int partition(int list[],int left,int right)
+{
+	
+}
+
+void quick_sort(int list[], int left,int right)
+{
+	
+}
+
+void print_list(int list[],int left, int right)
+{
+	int i;
+	for(i=left;i<=right;i++)
+		printf(" %d  ",list[i]);
+	printf("\n");
+}
+
+void main()
+{
+	int list[MAX_SIZE]={5,3,8,4,9,1,6,2,7,10};
+	int n=MAX_SIZE;
+	quick_sort(list,0,n-1);
+	print_list(list,0,n-1);
+}

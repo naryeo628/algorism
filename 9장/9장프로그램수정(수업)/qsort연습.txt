@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct{
+	int id;
+	char name[20];
+}element;
+int compare1(const void *arg1,const void *arg2)
+{
+	if(*(double*)arg1>*(double *)arg2) return 1;
+	else if(*(double*)arg1==*(double*)arg2) return 0;
+	else return -1;
+}
+
+int compare2(const void *arg1,const void *arg2)
+{
+	if(*(int*)arg1>*(int *)arg2) return 1;
+	else if(*(int*)arg1==*(int*)arg2) return 0;
+	else return -1;
+}
+
+int compare3(const void *arg1,const void *arg2)
+{
+	return strcmp(*(char**)arg1,*(char**)arg2);
+}
+
+int compare4(const void *arg1,const void *arg2)
+{
+	if((*(element *)arg1).id> (*(element *)arg2).id) return 1;
+	else if((*(element *)arg1).id== (*(element *)arg2).id) return 0;
+	else return -1;
+}
+
+int compare5(const void *arg1,const void *arg2)
+{
+	return strcmp( (*(element *)arg1).name,(*(element *)arg2).name);
+}
+void main()
+{
+	int i;
+	double list[5]={2.1,0.9,1.6,3.8,1.2};
+	int list2[5]={3,2,6,4,1};
+	char *list3[5]={"abc","sda","aaa","bbb","ewr"};
+	qsort(list,5,sizeof(double),compare1);
+	for(i=0;i<5;i++)
+		printf("%f ",list[i]);
+	printf("\n");
+	qsort(list2,5,sizeof(int),compare2);
+    for(i=0;i<5;i++)
+		printf("%d ",list2[i]);
+	printf("\n");
+	qsort(list3, (size_t)5, sizeof(char*),compare3);
+   for(i=0;i<5;i++)
+		printf("%s ",list3[i]);
+	printf("\n");
+
+	element list4[3]={{20,"Kwon"},{32,"Kim"},{12,"Lee"}};
+	qsort(list4, 3,sizeof(element),compare4);
+	for(i=0;i<3;i++)
+		printf("<%d, %s>", list4[i].id, list4[i].name);
+	printf("\n");
+
+   qsort(list4, 3,sizeof(element),compare5);
+	for(i=0;i<3;i++)
+		printf("<%d, %s>", list4[i].id, list4[i].name);
+	printf("\n");
+}

@@ -1,0 +1,37 @@
+#include	<stdio.h>
+
+int Partition(int A[], int s, int e)
+{
+	//퀵 정렬에서의 분할 함수
+}
+
+void insertion_sort(int list[], int s, int e)
+{
+   //시작 인덱스 s, 끝 인덱스 e인 배열에 대한 삽입정렬
+}
+
+void	sort_Hybrid(int	A[], int s, int e)
+
+{
+	//printf("sort_Hybrid(%d, %d)\n",s,e);
+	if(s >= e)	return;
+	if(e-s < 10){
+
+		insertion_sort(A,s,e);
+		return;		
+	}
+	int m= Partition(A, s, e);
+	sort_Hybrid(A, s, m-1);
+
+	sort_Hybrid(A, m+1, e);
+	
+}
+
+void main()
+{
+	int A[]={12,34,6,18,10,11,31,51,17,9,1,3,6,9,12,14,50,35,37,10,12,13};
+//	insertion_sort(A,0,21);
+	sort_Hybrid(A,0,21);
+	for(int i=0;i<=21;i++) printf("%d ",A[i]);
+	printf("\n");
+}
